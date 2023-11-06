@@ -8,8 +8,8 @@ ssh root@%piaddr% "service taskcat-bot stop"
 scp ./target/taskcat-bot.jar root@%piaddr%:/home/pi/services/taskcatbot/
 echo "taskcatbot uploaded..."
 
-rem scp -r ./plugins roo@%piaddr%:/home/pi/services/taskcatbot/plugins/
-rem echo "plugins uploaded..."
+scp -r ./plugins root@%piaddr%:/home/pi/services/taskcatbot/
+echo "plugins uploaded..."
 
 ssh root@%piaddr% "service taskcat-bot start && service taskcat-bot status"
 echo "taskcatbot started"
