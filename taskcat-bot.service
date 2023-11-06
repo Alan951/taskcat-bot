@@ -1,0 +1,18 @@
+[Unit]
+Description=TaskCat Bot
+After=syslog.target network.target
+[Service]
+User=root
+Group=root
+
+Type=simple
+
+StandardOutput=append:/var/taskcat-bot.log
+StandardError=append:/var/taskcat-bot.log
+
+WorkingDirectory=/home/pi/services/taskcatbot
+ExecStart=/bin/java -jar taskcat-bot.jar
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

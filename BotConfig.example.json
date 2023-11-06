@@ -1,0 +1,16 @@
+[
+    {
+        "bot": "BotTaskName",
+        "platform": "TELEGRAM",
+        "key": "your-api-key",
+        "enabled": true,
+        "users": [
+            {
+                "idUser": 0,
+                "name": "yourName",
+                "role": "CREATOR",
+                "authorized": true
+            }
+        ]
+    }
+]

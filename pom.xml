@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.jalan</groupId>
+  <artifactId>taskcat-bot</artifactId>
+  <version>1.0</version>
+
+  <name>taskcat-bot</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.26</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.pengrad</groupId>
+      <artifactId>java-telegram-bot-api</artifactId>
+      <version>6.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.20.0</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+
+  </dependencies>
+  <profiles>
+    <profile>
+      <id>all</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <finalName>taskcat-bot</finalName>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <archive>
+                <manifest>
+                  <mainClass>com.jalan.taskcatbot.App</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                <phase>package</phase> <!-- bind to the packaging phase -->
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>shared</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+              <finalName>taskcatbot-ext</finalName>
+              <includes>
+                <include>com/jalan/taskcatbot/bot/handlers/IHandler.class</include>
+                <include>com/jalan/taskcatbot/bot/handlers/IHandlerSelector.class</include>
+                <include>com/jalan/taskcatbot/bot/handlers/HandlerRegistry.class</include>
+                <include>com/jalan/taskcatbot/bot/User.class</include>
+                <include>com/jalan/taskcatbot/bot/UserRole.class</include>
+                <include>com/jalan/taskcatbot/bot/IBot.class</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
