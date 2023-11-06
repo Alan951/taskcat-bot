@@ -2,6 +2,7 @@ package com.jalan.taskcatbot.bot;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,7 +19,7 @@ public class ConfigLoader {
 
     public ConfigLoader() {
         basePath = "./";
-        botConfig = "BotConfig.json";
+        botConfig = "config.json";
 
         try{
             basePath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getAbsolutePath();
@@ -28,12 +29,16 @@ public class ConfigLoader {
         }
     }
 
-    public BotConfig[] loadBotConfig() throws JsonProcessingException, JsonMappingException, IOException {
+    public Config loadConfig() throws JsonProcessingException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         
-        BotConfig[] config = mapper.readValue(new File(basePath + File.separator + botConfig), BotConfig[].class);
+        Config config = mapper.readValue(new File(basePath + File.separator + botConfig), Config.class);
 
         return config;
+    }
+
+    public List<BotConfig> loadBotConfig() throws JsonProcessingException, JsonMappingException, IOException {
+        return this.loadConfig().getBotConfig();
     }
 
     public boolean saveBotConfig(BotConfig[] config) throws JsonProcessingException, IOException {

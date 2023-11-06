@@ -1,0 +1,31 @@
+{
+    "BotConfig": [
+        {
+            "bot": "BotTaskName",
+            "platform": "TELEGRAM",
+            "key": "your-api-key",
+            "enabled": true,
+            "users": [
+                {
+                    "idUser": 0,
+                    "name": "yourName",
+                    "role": "CREATOR",
+                    "authorized": true
+                }
+            ]
+        }
+    ],
+    "PluginRegistry": {
+        "transmission": {
+            "key1": "value1",
+            "key2": "value2",
+            "keylist": {
+                "pe": [
+                    "pepe",
+                    "popo",
+                    "pupu"
+                ]
+            }
+        }
+    }
+}

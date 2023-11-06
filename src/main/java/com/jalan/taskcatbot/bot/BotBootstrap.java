@@ -3,7 +3,6 @@ package com.jalan.taskcatbot.bot;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.jalan.taskcatbot.CentralMessageUnit;
@@ -38,7 +37,7 @@ public class BotBootstrap {
         extLoader.load();
 
         try {
-            this.botConfigs = Arrays.asList(configLoader.loadBotConfig());
+            this.botConfigs = configLoader.loadBotConfig();
             this.centralMessageUnit = new CentralMessageUnit(new SecHelper(botConfigs));
 
             for(ExtensionFile extFile : extLoader.getExtFiles()) {

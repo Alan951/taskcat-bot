@@ -5,3 +5,4 @@ plugins/*
 *.log
 target
 BotConfig.json
+config.json
