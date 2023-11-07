@@ -109,6 +109,7 @@
                 <include>com/jalan/taskcatbot/bot/User.class</include>
                 <include>com/jalan/taskcatbot/bot/UserRole.class</include>
                 <include>com/jalan/taskcatbot/bot/IBot.class</include>
+                <include>com/jalan/taskcatbot/bot/IPluginConfig.class</include>
               </includes>
             </configuration>
           </plugin>

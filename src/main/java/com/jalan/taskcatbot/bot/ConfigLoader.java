@@ -16,6 +16,7 @@ public class ConfigLoader {
     private Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
     private String basePath;
     private String botConfig;
+    private Config config;
 
     public ConfigLoader() {
         basePath = "./";
@@ -33,6 +34,7 @@ public class ConfigLoader {
         ObjectMapper mapper = new ObjectMapper();
         
         Config config = mapper.readValue(new File(basePath + File.separator + botConfig), Config.class);
+        this.config = config;
 
         return config;
     }
@@ -50,6 +52,10 @@ public class ConfigLoader {
 
     public void setBasePath(String basePath) {
         this.basePath = basePath;
+    }
+
+    public Config getConfig() {
+        return config;
     }
 
 }

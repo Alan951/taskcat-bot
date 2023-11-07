@@ -19,6 +19,7 @@ public class BotBootstrap {
     private List<IBot> bots;
     private ConfigLoader configLoader;
     private CentralMessageUnit centralMessageUnit;
+    private PluginConfig pluginConfig;
     
     private Logger logger = LoggerFactory.getLogger(BotBootstrap.class);
 
@@ -34,10 +35,14 @@ public class BotBootstrap {
             configLoader.setBasePath(basePathConfig);
         }
 
-        extLoader.load();
-
         try {
             this.config = configLoader.loadConfig();
+            this.pluginConfig = new PluginConfig(configLoader);
+            IPluginConfig pluginConfig = this.pluginConfig;
+
+            extLoader.addDependency(pluginConfig);
+
+            extLoader.load();
 
             //TODO: add validations if exists configs of specific fields
 
