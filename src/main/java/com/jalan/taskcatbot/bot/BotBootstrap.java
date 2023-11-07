@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class BotBootstrap {
     
-    private List<BotConfig> botConfigs;
+    private Config config;
     private List<IBot> bots;
     private ConfigLoader configLoader;
     private CentralMessageUnit centralMessageUnit;
@@ -37,14 +37,17 @@ public class BotBootstrap {
         extLoader.load();
 
         try {
-            this.botConfigs = configLoader.loadBotConfig();
-            this.centralMessageUnit = new CentralMessageUnit(new SecHelper(botConfigs));
+            this.config = configLoader.loadConfig();
+
+            //TODO: add validations if exists configs of specific fields
+
+            this.centralMessageUnit = new CentralMessageUnit(new SecHelper(config.getBotConfig()));
 
             for(ExtensionFile extFile : extLoader.getExtFiles()) {
                 this.centralMessageUnit.addHandler(extFile.getHandler());
             }
             
-            for(BotConfig conf : this.botConfigs) {
+            for(BotConfig conf : this.config.getBotConfig()) {
                 this.logger.info("bot config: {} - {}", conf.getPlatform(), conf.getBot());
             }
 
@@ -55,7 +58,7 @@ public class BotBootstrap {
     }
 
     public void start() {
-        for(BotConfig botConfig : botConfigs) {
+        for(BotConfig botConfig : this.config.getBotConfig()) {
             if(botConfig.isEnabled()) {
                 try{
                     switch(botConfig.getPlatform()) {
