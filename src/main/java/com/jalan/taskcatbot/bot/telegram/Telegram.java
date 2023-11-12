@@ -7,7 +7,6 @@ import com.jalan.taskcatbot.bot.BotConfig;
 import com.jalan.taskcatbot.bot.IBot;
 import com.jalan.taskcatbot.bot.IBotConfig;
 import com.jalan.taskcatbot.bot.User;
-import com.jalan.taskcatbot.bot.UserRole;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
