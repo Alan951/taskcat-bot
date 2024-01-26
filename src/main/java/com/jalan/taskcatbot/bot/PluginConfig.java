@@ -2,7 +2,6 @@ package com.jalan.taskcatbot.bot;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jalan.taskcatbot.exceptions.PluginConfigFieldNotFound;
 import com.jalan.taskcatbot.exceptions.PluginConfigNotFound;
@@ -19,6 +18,10 @@ public class PluginConfig implements IPluginConfig {
 
     public void setConfigLoader(ConfigLoader configLoader) {
         this.configLoader = configLoader;
+    }
+
+    public ObjectMapper getObjectMapper() {
+        return this.objectMapper;
     }
 
     public Map<String, Object> findPluginConfig(String pluginName) throws PluginConfigNotFound {
@@ -48,12 +51,12 @@ public class PluginConfig implements IPluginConfig {
 
 
     @Override
-    public <T> T getConfig(String pluginName, String key) throws Exception {
+    public <T> T getConfig(String pluginName, String key, Class<T> valueType) throws Exception {
         Map<String, Object> fields = findPluginConfig(pluginName);
 
         if(!fields.containsKey(key)) throw new PluginConfigFieldNotFound(key);
 
-        return objectMapper.convertValue(fields.get(key), new TypeReference<T>() {});
+        return objectMapper.convertValue(fields.get(key), valueType);
     }
 
     @Override

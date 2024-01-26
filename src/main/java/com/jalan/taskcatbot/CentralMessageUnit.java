@@ -40,14 +40,14 @@ public class CentralMessageUnit {
 
     public IHandler evalHandler(String message) {
         for (IHandler handler : this.handlerRegistry.getHandlers()) {
-            if (handler instanceof IHandlerSelector) {
-                if(handler.getName().equals(message)){
-                    return handler;
-                } else if (((IHandlerSelector) handler).isSelectable(message)) {
-                    return handler;
-                } 
+            if(handler.getName().equals(message)) {
+                return handler;
+            } else if (handler instanceof IHandlerSelector && 
+                    ((IHandlerSelector) handler).isSelectable(message)) {
+                return handler;
             }
-        }
+        } // handler for iterator
+        
         //default handler
         return new RandomReplyHandler();
     }

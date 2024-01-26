@@ -8,7 +8,7 @@ public interface IPluginConfig {
 
     public Object getObjConfig(String pluginName, String key) throws Exception;
 
-    public <T> T getConfig(String pluginName, String key) throws Exception;
+    public <T> T getConfig(String pluginName, String key, Class<T> valueType) throws Exception;
 
     public String putConfig(String pluginName, String key, String value) throws Exception;
 
